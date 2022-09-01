@@ -5,7 +5,7 @@ import os
 if os.environ.get('MONGODB_URI'):
     MONGODB_URI = os.environ.get('MONGODB_URI')
 else:
-    MONGODB_URI = 'mongodb://localhost:27017'
+    MONGODB_URI = 'mongodb://172.31.47.21:32424'
 
 client = MongoClient(MONGODB_URI, connect=False)
 db = client.get_database('hawkeye')
