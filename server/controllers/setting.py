@@ -5,6 +5,7 @@ from config.database import blacklist_col, result_col, query_col, notice_col, gi
 from utils.hash import md5
 from utils.date import timestamp
 from github import Github, GithubException, BadCredentialsException
+from utils.log import logger
 import signal
 import os
 import requests
@@ -73,7 +74,9 @@ class GithubAccount(Resource):
         username = args.get('username')
         password = args.get('password')
         try:
+            logger.error('测试git认证开始')
             g = Github(username, password)
+            logger.error('测试git认证结束')
             github_col.save({'_id': md5(username), 'username': username, 'password': password,
                              'mask_password': password.replace(''.join(password[2:-2]), '****'), 'addat': timestamp(),
                              'rate_limit': int(g.get_rate_limit().search.limit),
